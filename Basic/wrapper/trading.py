@@ -1,11 +1,69 @@
-import finterstellar as fs
 import pandas as pd
 import numpy as np
 from wrapper import common
 import datetime as dt
-
+import  pandas as pd
+import  numpy as np
+from pykrx import stock
 
 class Trade:
+
+    def BB_trade(self, df, base_date, book, cd, n, sigma):
+        ##센터라인
+        df['center'] = df[cd].rolling(n).mean()
+        df['ub'] = df['center'] + sigma * df[cd].rolling(n).std()
+        df['lb'] = df['center'] - sigma * df[cd].rolling(n).std()
+        sample = df[base_date:].copy()
+        for i in sample.index:
+            price = sample.loc[i, cd]
+            if price > sample.loc[i, 'ub']:  ## 어퍼바운드 위면
+                book.loc[i, 't '+cd] = '' ##일단 놔두고
+            elif sample.loc[i, 'ub'] >= price and price >= sample.loc[i, 'lb']: #사이에 있을떄
+                if book.shift(1).loc[i, 't '+cd] == 'buy' or book.shift(1).loc[i, 't '+cd] == 'ready': ##이미 매수상태면
+                    book.loc[i, 't '+cd] = 'buy'  ##그대로 유지
+                else:                          ###빈손상태면
+                    book.loc[i, 't '+cd] = ''  ##그대로 유지, 일단 놔둬
+            elif sample.loc[i, 'lb'] > price: #가격이 아래 바운더리 뚫으면
+                if book.shift(1).loc[i, 't '+cd] == 'buy':
+                    book.loc[i, 't '+cd] = 'buy'  #매수
+                else:
+                    book.loc[i, 't ' + cd] = 'ready'
+        status = ''
+        for i in book.index:
+            if book.loc[i, 't '+cd] == 'buy': #매수상태면
+                if book.shift(1).loc[i, 't '+cd] == 'buy':
+                    status = 'll'
+                elif book.shift(1).loc[i, 't '+cd] == '':
+                    status = 'zl'
+                else:
+                    status = 'zl'
+            elif book.loc[i, 't '+cd] == '':
+                if book.shift(1).loc[i, 't '+cd] == 'buy':
+                    status = 'lz'
+                elif book.shift(1).loc[i, 't '+cd] == '':
+                    status = 'zz'
+                else:
+                    status = 'zz'
+            else:
+                status = 'zz'
+
+            book.loc[i, 'p '+cd] = status
+
+
+
+
+    def trade(self, df, book, cd, buy, sell):
+        for i in df.index:
+            price = df.loc[i, cd]
+            if price < buy:
+                book.loc[i, 't '+cd] = 'buy'
+            elif price > sell:
+                book.loc[i, 't '+cd] = '' ##포지션 청산기록
+            else: ##가격이 구간 사이면
+                if book.shift(1).loc[i, 't '+cd] == 'buy': #이미 매수상태이면
+                    book.loc[i, 't '+cd] = 'buy'
+
+
 
     def rsi(df, period):
 
@@ -70,8 +128,8 @@ class Trade:
         return (sample)
 
     def create_trade_book(self, sample, s_cd):
-        book = pd.DataFrame()
-        book[s_cd] = sample[s_cd]
+        self.book = pd.DataFrame()
+        self.book[s_cd] = sample[s_cd]
         # book['trade'] = ''
         if type(s_cd) == str:
             cds = []
@@ -79,9 +137,9 @@ class Trade:
         else:
             cds = s_cd
         for c in cds:
-            book['t ' + c] = ''
-            book['p ' + c] = ''
-        return (book)
+            self.book['t ' + c] = ''
+            self.book['p ' + c] = ''
+        return(self.book)
 
     def position(self, book, s_cd):
         if type(s_cd) == str:
@@ -630,7 +688,7 @@ class PairTrade(Trade):
         print('As of', last_date, 'this model suggests you to', strategy)
         return (strategy)
 
-
+'''
 class FuturesTradeOnValue(PairTrade):
 
     def expected_y(self, sample, s_codes, r, d, T):
@@ -718,7 +776,8 @@ class FuturesTradeOnBasis(Trade):
             elif 0 > sample.loc[i, 'basis']:
                 book.loc[i, 't ' + s_codes[1]] = 'buy'
         return (book)
-
+'''
+'''
     def trading_strategy(self, sample, thd, s_codes, last_date):
         i = sample.index[-1]
 
@@ -727,7 +786,8 @@ class FuturesTradeOnBasis(Trade):
         elif thd >= sample.loc[i, 'basis'] and sample.loc[i, 'basis'] >= 0:
             strategy = 'do nothing'
         elif 0 > sample.loc[i, 'basis']:
-            strategy = 'buy ' + s_codes[s1]
+            strategy = 'buy ' + s_codes[1]
 
         print('As of', last_date, 'this model suggests you to', strategy)
         return (strategy)
+'''

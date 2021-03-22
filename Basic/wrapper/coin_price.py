@@ -1,10 +1,9 @@
-import finterstellar as fs
 import pandas as pd
 from urllib.request import urlopen
 from datetime import datetime as dt
 import json
 import re
-
+from wrapper import common
 
 class CoinPrice:
 
@@ -27,7 +26,7 @@ class CoinPrice:
         pt = js['data']['date']
         pt = int(pt) / 1000
         present_time = dt.fromtimestamp(pt)
-        present_time = fs.utc_kst(present_time).strftime('%Y-%m-%d %H:%M:%S')
+        present_time = common.utc_kst(present_time).strftime('%Y-%m-%d %H:%M:%S')
 
         return present_time, current_price, bid_price, ask_price
 
@@ -77,7 +76,7 @@ class CoinPrice:
         for d in hp_lst:
             pt = int(d[0]) / 1000
             present_time = dt.fromtimestamp(pt)
-            d[0] = fs.utc_kst(present_time).strftime('%Y-%m-%d %H:%M:%S')
+            d[0] = common.utc_kst(present_time).strftime('%Y-%m-%d %H:%M:%S')
             d[1] = float(d[1])  # 시가
             d[2] = float(d[2])  # 종가
             d[3] = float(d[3])  # 고가
