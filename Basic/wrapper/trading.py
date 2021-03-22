@@ -1,10 +1,39 @@
 import finterstellar as fs
 import pandas as pd
 import numpy as np
+from wrapper import common
 import datetime as dt
 
 
 class Trade:
+
+    def rsi(df, period):
+
+        for p in df.iloc[period:].index:
+            d, ad, u, au = 0, 0., 0, 0.
+            for i in range(period):
+                diff = df.shift(i).loc[p, 'diff']  ## i일 전의 diff값을 읽어와서
+                if diff >= 0:  # 양수이면
+                    u += 1  # count 해주고
+                    au += diff  ##누적으로 더해줘
+                elif diff < 0:  # 음수면
+                    d += 1  # count 해주고
+                    ad -= diff  ## 누적으로 빼줘( 음수니까 마이너스해줘야 플러스로 돌아오지)
+            if (au+ad) != 0:
+                rsi = (au / (au + ad)) * 100
+            else:
+                rsi = 50
+
+            df.loc[p, 'RSI'+str(period)] = rsi
+
+
+    def trend_trading(self, sample, book, cd, factor):
+        for i in sample.index:
+            if sample.loc[i, factor] >= 0:  ##상승추세면
+                book.loc[i,'t '+cd] = 'buy' # 사
+            elif sample.loc[i, factor] < 0:
+                book.loc[i,'t '+cd] = ''  ## 털어
+            return (book)
 
     def date_format(self, d=''):
         if d != '':
@@ -118,7 +147,7 @@ class Trade:
     # 수익률
     def returns(self, book, s_cd, display=False, report_name='', report={}, fee=0.0):
         # 손익 계산
-        cds = fs.str_list(s_cd)
+        cds = common.str_list(s_cd)
 
         rtn = 1.0
         book['return'] = 1
@@ -187,7 +216,7 @@ class Trade:
         total_days = (last_day - first_day).days
         annualizer = total_days / 365
 
-        print(fs.FontStyle.bg_white + 'Accumulated return:', round((acc_rtn - 1) * 100, 2), '%' + fs.FontStyle.end_bg, \
+        print(common.FontStyle.bg_white + 'Accumulated return:', round((acc_rtn - 1) * 100, 2), '%' + common.FontStyle.end_bg, \
               ' ( # of trade:', no_trades, ', # of win:', no_win, ', fee: %.2f' % (fee * 100), \
               '%,', 'period: %.2f' % annualizer, 'yr )')
 
@@ -199,16 +228,16 @@ class Trade:
             prob_win = 0.0
         avg_rtn = round(avg_rtn, 4)
 
-        bet = fs.Bet()
+        bet = common.Bet()
         kelly_ratio = bet.kelly_formular(prob_win)
         kelly_ratio = round(kelly_ratio, 4)
 
         print('Avg return: %.2f' % ((avg_rtn - 1) * 100), end=' %')
         if prob_win > 0.5:
-            print(fs.FontStyle.orange, end='')
+            print(common.FontStyle.orange, end='')
         print(', Prob. of win: %.2f' % (prob_win * 100), end=' %')
         if prob_win > 0.5:
-            print(fs.FontStyle.end_c, end='')
+            print(common.FontStyle.end_c, end='')
         print(', Kelly ratio: %.2f' % (kelly_ratio * 100), end=' %')
 
         mdd = round((book['return'].min()), 4)
@@ -229,7 +258,7 @@ class Trade:
     def benchmark_return(self, book, s_cd, report_name='', report={}):
         # 벤치마크 수익률
 
-        cds = fs.str_list(s_cd)
+        cds = common.str_list(s_cd)
 
         n = len(cds)
         rtn = dict()

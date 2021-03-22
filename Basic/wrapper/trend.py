@@ -3,6 +3,7 @@ import pandas as pd
 
 class Trend():
 
+
     def MA(self, df, cd, long, short, base_date):
         ma = pd.DataFrame()
         ma[cd] = df[cd].copy()

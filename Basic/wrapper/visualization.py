@@ -405,6 +405,7 @@ class VisualizeIntraday:
         cds = common.str_list(s_cd)
 
         fig, ax = plt.subplots(figsize=size)
+        plt.show()
         x = df.loc[b_date:].index
 
         plt.autoscale(True, axis='both')
@@ -421,7 +422,7 @@ class VisualizeIntraday:
         plt.xticks(np.arange(0, x_length + jump, jump), xs, rotation=45)
 
         plt.legend()
-
+        plt.show()
         if make_file:
             plt.savefig('./image/' + VisualizeIntraday.today + cds[0] + ' price_view.png', bbox_inches='tight')
 

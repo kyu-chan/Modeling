@@ -2,23 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e96448d5-7bcc-4913-a323-f7e959a556f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Investing_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/investing_com_all.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/merge.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prac.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test02.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/__iniit__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/coin_price.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/data_pred.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/trading.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/trend.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/util.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wrapper/visualization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSI_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/moving_avg_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/S&amp;P 500 Historical Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/S&amp;P 500 Historical Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/CSI 300 Historical Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/CSI 300 Historical Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/KOSPI 200 Historical Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/KOSPI 200 Historical Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Nikkei 225 Historical Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/Nikkei 225 Historical Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/S&amp;P 500 Historical Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/S&amp;P 500 Historical Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test3.py" beforeDir="false" afterPath="$PROJECT_DIR$/test3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/total_S&amp;P500.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper/trading.py" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper/trading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper/trend.py" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper/trend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +43,8 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.investing_com_all">
-    <configuration name="Investing_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.RSI_model">
+    <configuration name="RSI_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basic" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -60,7 +56,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Investing_data.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RSI_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,7 +107,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test02" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="moving_avg_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basic" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -123,7 +119,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test02.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/moving_avg_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -155,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.RSI_model" />
+        <item itemvalue="Python.moving_avg_test" />
         <item itemvalue="Python.investing_com_all" />
         <item itemvalue="Python.test3" />
         <item itemvalue="Python.merge" />
-        <item itemvalue="Python.Investing_data" />
-        <item itemvalue="Python.test02" />
       </list>
     </recent_temporary>
   </component>

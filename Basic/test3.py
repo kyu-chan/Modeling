@@ -2,13 +2,11 @@ import matplotlib.pyplot as plt
 import sys
 import os
 import matplotlib as pt
-pt.use("Qt5Agg")
+pt.use("Qt5Agg") ##플랏
 sys.path.append(r'C:\Users\pc\Desktop\stock\Modeling\Basic\wrapper')
 
 from wrapper import data_pred
-from wrapper import data_pred
 from wrapper import visualization
-import wrapper as fs
 
 #print(dir())   ####절대경로로 돌려서 불러오고 임포트된거 확인
 os.chdir(r'C:\Users\pc\Desktop\stock\Modeling\Basic')
@@ -40,5 +38,7 @@ print(p_df.tail())
 v = visualization.Visualize()
 base_date = '2017-03-05'
 v.index_view(p_df, base_date, p_cd)
+plt.show()
+###Trend -> moving ave 연습
 
 
